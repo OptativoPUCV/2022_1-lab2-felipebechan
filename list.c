@@ -39,8 +39,8 @@ List * createList() {
 void * firstList(List * list) {
     //
      if(list->head && list->head->data){
-      list->current = list->head;
-      return list->head->data;
+        list->current = list->head;
+        return list->head->data;
     }
     //
     return NULL;
@@ -49,53 +49,60 @@ void * firstList(List * list) {
 void * nextList(List * list) {
     //
     if(list->current && list->current->next){
-      list->current = list->current->next;
-      return list->current->data;
+        list->current = list->current->next;
+        return list->current->data;
     }
     //
     return NULL;
 }
 
 void * lastList(List * list) {
-     if(list->tail && list->tail->data){
-      list->current = list->tail;
-      return list->tail->data;
+    //
+    if(list->tail && list->tail->data){
+        list->current = list->tail;
+        return list->tail->data;
+      //
     }
     return NULL;
 }
 
 void * prevList(List * list) {
-     if(list -> current && list -> current -> prev){
-      list -> current = list -> current -> prev;
-      return list -> current -> data;
+    //
+    if( list->current && list->current->prev){
+        list->current = list->current->prev;
+        return list->current->data;
     }
+    //
     return NULL;
 }
 
 void pushFront(List * list, void * data) {
+
     Node *nodo = createNode(data);
+
     nodo -> next = list -> head;
-    if (list -> head)
-      list -> head -> prev = nodo;
-    else
-      list -> tail = nodo;
-    list -> head = nodo;
-    nodo -> prev = NULL;
+    if (list->head){
+        list->head->prev = nodo;}
+
+    else{
+        list-> tail = nodo;
+        list->head = nodo;
+        nodo->prev = NULL;
+    }
 
 }
 
 void pushBack(List * list, void * data) {
+
     list->current = list->tail;
-    pushCurrent(list,data);
+    pushCurrent(list,data );
+
 }
 
 void pushCurrent(List * list, void * data) {
      Node *nodo = createNode(data);
-    if(list == NULL){
-      list -> head = nodo;
-      list -> tail = nodo;
-    }
-    else{
+    if(list != NULL){
+     
       if(list -> current == list -> tail){
         list -> current -> next = nodo;
         nodo -> prev = list -> current;
@@ -108,7 +115,12 @@ void pushCurrent(List * list, void * data) {
         list -> current -> next = nodo;
       }
     }
-}
+    else
+     list -> head = nodo;
+    list -> tail = nodo;
+    
+    }
+
 
 void * popFront(List * list) {
     list->current = list->head;
