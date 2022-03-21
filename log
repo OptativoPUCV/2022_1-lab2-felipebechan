@@ -94,3 +94,14 @@ Sun Mar 20 22:02:40 HSP 2022:
  tests:  11|1
 total_score: 60/70
 2823127
+Sun Mar 20 22:04:14 HSP 2022: 
+ list.c | 21 ---------------------
+ 1 file changed, 21 deletions(-)
+In file included from test.c:5:0:
+list.c: In function 'popCurrent':
+list.c:140:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+cc1.exe: all warnings being treated as errors
+Compilation failed
+5dae0f1
