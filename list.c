@@ -119,10 +119,10 @@ void pushCurrent(List * list, void * data) {
 
       }
     }
-    else
+    else{
      list->head = nodo;
      list->tail = nodo;
-    
+    }
     }
 
 
