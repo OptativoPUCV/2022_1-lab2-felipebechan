@@ -20,7 +20,7 @@ struct List {
 typedef List List;
 
 Node * createNode(void * data) {
-    Node * new = (Node *)malloc(sizeof(Node));
+  Node * new = (Node *)malloc(sizeof(Node));
     assert(new != NULL);
     new->data = data;
     new->prev = NULL;
@@ -29,7 +29,11 @@ Node * createNode(void * data) {
 }
 
 List * createList() {
-     return NULL;
+       List *lista = (List *) calloc(1,sizeof(List));
+    lista -> head = NULL;
+    lista -> tail = NULL;
+    lista -> current = NULL;
+    return lista;
 }
 
 void * firstList(List * list) {
