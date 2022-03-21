@@ -140,7 +140,7 @@ void * popCurrent(List * list) {
     // [H]-[C]-[T]
     // ? <C=!NULL
     if( list->current->prev != NULL ){
-        list->current= list->current->next;
+        list->current->prev->next = list->current->next;
     }
     else list->head = list->current->next;
 
