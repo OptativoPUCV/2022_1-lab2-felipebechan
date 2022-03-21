@@ -78,16 +78,16 @@ void * prevList(List * list) {
 
 void pushFront(List * list, void * data) {
 
-    Node *nodo = createNode(data);
+    Node *node = createNode(data);
 
-    nodo -> next = list -> head;
+    node -> next = list -> head;
     if (list->head){
-        list->head->prev = nodo;}
+        list->head->prev = node;}
 
     else{
-        list-> tail = nodo;
-        list->head = nodo;
-        nodo->prev = NULL;
+        list-> tail = node;
+        list->head = node;
+        node->prev = NULL;
     }
 
 }
@@ -100,28 +100,28 @@ void pushBack(List * list, void * data) {
 }
 
 void pushCurrent(List * list, void * data) {
-     Node *nodo = createNode(data);
+     Node *node = createNode(data);
     if(list != NULL){
      
       if(list->current == list->tail){
 
-        list->current->next = nodo;
-        nodo->prev = list->current;
-        list->tail = nodo;
+        list->current->next = node;
+        node->prev = list->current;
+        list->tail = node;
 
       }
       else{
 
-        nodo->next = list->current->next;
-        list->current->next->prev = nodo;
-        nodo->prev = list->current;
-        list->current->next = nodo;
+        node->next = list->current->next;
+        list->current->next->prev = node;
+        node->prev = list->current;
+        list->current->next = node;
 
       }
     }
     else{
-     list->head = nodo;
-     list->tail = nodo;
+     list->head = node;
+     list->tail = node;
     }
     }
 
@@ -137,31 +137,23 @@ void * popBack(List * list) {
 }
 
 void * popCurrent(List * list) {
-    void* copia = list -> current -> data;
-  Node* nodo = list -> current;
-  if (list -> current != list -> head && list -> current != list -> tail)
-  {
-    list -> current -> prev -> next = list -> current -> next;
-    list -> current -> next -> prev = list -> current -> prev;
-    list -> current = list -> current -> next;
-    free (nodo);
-  }
-  else if (list -> current == list -> tail)
-  {
-    list -> current -> prev -> next = NULL;
-    list -> tail = list -> current -> prev;
-    list -> current = list -> tail;
-    free (nodo);
-  }
-  else
-  {
-    list -> current -> next -> prev = NULL;
-    list -> head = list -> current -> next;
-    list -> current = list -> current;
-    free (nodo);
-  }
-  
-  return copia;
+    if ( list->current->prev != NULL ){
+        list->current->prev->next = list->current->next;
+    }
+    else list->head = list->current->next;
+
+    if (list->current->next != NULL){
+        list->current->next->prev = list->current->prev;
+    }
+    else{
+        
+        list->current->prev->next = NULL;
+        list->tail = list->current->prev;
+    } 
+
+    
+
+    return list->current->data;
 }
 
 void cleanList(List * list) {
