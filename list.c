@@ -29,7 +29,7 @@ Node * createNode(void * data) {
 }
 
 List * createList() {
-       List *lista = (List *) calloc(1,sizeof(List));
+    List *lista = (List *) calloc(1,sizeof(List));
     lista -> head = NULL;
     lista -> tail = NULL;
     lista -> current = NULL;
@@ -37,25 +37,29 @@ List * createList() {
 }
 
 void * firstList(List * list) {
-     if(list -> head && list -> head -> data){
-      list -> current = list -> head;
-      return list -> head -> data;
+    //
+     if(list->head && list->head->data){
+      list->current = list->head;
+      return list->head->data;
     }
+    //
     return NULL;
 }
 
 void * nextList(List * list) {
-    if(list -> current && list -> current -> next){
-      list -> current = list -> current -> next;
-      return list -> current -> data;
+    //
+    if(list->current && list->current->next){
+      list->current = list->current->next;
+      return list->current->data;
     }
+    //
     return NULL;
 }
 
 void * lastList(List * list) {
-     if(list -> tail && list -> tail -> data){
-      list -> current = list -> tail;
-      return list -> tail -> data;
+     if(list->tail && list->tail->data){
+      list->current = list->tail;
+      return list->tail->data;
     }
     return NULL;
 }
