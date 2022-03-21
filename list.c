@@ -103,21 +103,25 @@ void pushCurrent(List * list, void * data) {
      Node *nodo = createNode(data);
     if(list != NULL){
      
-      if(list -> current == list -> tail){
-        list -> current -> next = nodo;
-        nodo -> prev = list -> current;
-        list -> tail = nodo;
+      if(list->current == list->tail){
+
+        list->current->next = nodo;
+        nodo->prev = list->current;
+        list->tail = nodo;
+
       }
       else{
-        nodo -> next = list -> current -> next;
-        list -> current -> next -> prev = nodo;
-        nodo -> prev = list -> current;
-        list -> current -> next = nodo;
+
+        nodo->next = list->current->next;
+        list->current->next->prev = nodo;
+        nodo->prev = list->current;
+        list->current->next = nodo;
+
       }
     }
     else
-     list -> head = nodo;
-    list -> tail = nodo;
+     list->head = nodo;
+     list->tail = nodo;
     
     }
 
@@ -133,7 +137,31 @@ void * popBack(List * list) {
 }
 
 void * popCurrent(List * list) {
-    return NULL;
+    void* copia = list -> current -> data;
+  Node* nodo = list -> current;
+  if (list -> current != list -> head && list -> current != list -> tail)
+  {
+    list -> current -> prev -> next = list -> current -> next;
+    list -> current -> next -> prev = list -> current -> prev;
+    list -> current = list -> current -> next;
+    free (nodo);
+  }
+  else if (list -> current == list -> tail)
+  {
+    list -> current -> prev -> next = NULL;
+    list -> tail = list -> current -> prev;
+    list -> current = list -> tail;
+    free (nodo);
+  }
+  else
+  {
+    list -> current -> next -> prev = NULL;
+    list -> head = list -> current -> next;
+    list -> current = list -> current;
+    free (nodo);
+  }
+  
+  return copia;
 }
 
 void cleanList(List * list) {
